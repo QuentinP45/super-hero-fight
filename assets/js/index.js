@@ -11,7 +11,7 @@ let selectedLength = 0;
 ajaxGet(listHeroes, function(response) {
     let heroes = JSON.parse(response);
     
-    heroes = getRandHeroes(heroes, 12);
+    heroes = getRandHeroes(heroes, 6);
 
     heroes.forEach(hero => {
         const name = hero.name;
@@ -27,7 +27,11 @@ ajaxGet(listHeroes, function(response) {
         boxCardElt.addEventListener("click", function() {
             if (selectedLength < 2) {
                 const contentSelectedHeroElt = document.createElement("div");
-                contentSelectedHeroElt.classList.add("col-md-6");
+                if (selectedLength === 0) {
+                    contentSelectedHeroElt.classList.add("offset-md-3", "col-md-2");
+                } else {
+                    contentSelectedHeroElt.classList.add("offset-md-2", "col-md-2");
+                }
 
                 const boxCardElt = document.createElement("div");
                 boxCardElt.classList.add("box-card");
