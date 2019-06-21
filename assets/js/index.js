@@ -25,6 +25,7 @@ ajaxGet(listHeroes, function(response) {
         const boxCardElt = document.createElement("div");
         boxCardElt.classList.add("box-card");
         boxCardElt.addEventListener("click", function() {
+            // before heroes selection
             if (selectedLength < 2) {
 
                 const contentSelectedHeroElt = document.createElement("div");
@@ -62,6 +63,28 @@ ajaxGet(listHeroes, function(response) {
 
                 selectedElt.appendChild(contentSelectedHeroElt);
                 selectedLength++;
+
+                // after heroes selection
+                if (selectedLength === 2) {
+                    // create transition before fight
+                    setTimeout(function() {
+                        // keep only selected heroes
+                        document.querySelector("h1").style.display = "none";
+                        heroesElt.style.display = "none";
+
+                        // add health bar element to the DOM
+                        const boxCardElts = selectedElt.getElementsByClassName("box-card");
+                        Array.from(boxCardElts).forEach(elt => {
+                            const healthBarElt = document.createElement("div");
+                            healthBarElt.style.border = "solid";
+                            healthBarElt.style.width = "100%";
+                            healthBarElt.style.height = "20px";
+                            healthBarElt.style.backgroundColor = "green";
+
+                            elt.insertBefore(healthBarElt, elt.firstElementChild);
+                        });
+                    }, 2000);
+                }
             }
         });
         
@@ -108,3 +131,4 @@ function getRandHeroes(heroes, number) {
     }
     return randHeroes;
 }
+
