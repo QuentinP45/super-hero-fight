@@ -5,6 +5,9 @@ const listHeroes = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api//all.j
 const heroesElt = document.getElementById("heroes");
 const selectedElt = document.getElementById("selected");
 
+// variables
+let selectedLength = 0;
+
 ajaxGet(listHeroes, function(response) {
     let heroes = JSON.parse(response);
     
@@ -22,36 +25,39 @@ ajaxGet(listHeroes, function(response) {
         const boxCardElt = document.createElement("div");
         boxCardElt.classList.add("box-card");
         boxCardElt.addEventListener("click", function() {
-            const contentSelectedHeroElt = document.createElement("div");
-            contentSelectedHeroElt.classList.add("col-md-6");
+            if (selectedLength < 2) {
+                const contentSelectedHeroElt = document.createElement("div");
+                contentSelectedHeroElt.classList.add("col-md-6");
 
-            const boxCardElt = document.createElement("div");
-            boxCardElt.classList.add("box-card");
+                const boxCardElt = document.createElement("div");
+                boxCardElt.classList.add("box-card");
 
-            // hero img element
-            const imgElt = document.createElement("img");
-            imgElt.src = hero.images.sm;
-            imgElt.alt = "Image de " + hero.name;
-            boxCardElt.appendChild(imgElt);
-            
-            // hero name element
-            const nameElt = document.createElement("p");
-            nameElt.textContent = hero.name;
-            nameElt.classList.add("hero-name");
-            boxCardElt.appendChild(nameElt);
-            
-            // hero power stats element
-            const listElt = document.createElement("ul");
-            for (statId in hero.powerstats) {
-                const statElt = document.createElement("li");
-                statElt.textContent = statId + " : " + powerStats[statId];
-                listElt.appendChild(statElt);
-            };
-            boxCardElt.appendChild(listElt);
+                // hero img element
+                const imgElt = document.createElement("img");
+                imgElt.src = hero.images.sm;
+                imgElt.alt = "Image de " + hero.name;
+                boxCardElt.appendChild(imgElt);
+                
+                // hero name element
+                const nameElt = document.createElement("p");
+                nameElt.textContent = hero.name;
+                nameElt.classList.add("hero-name");
+                boxCardElt.appendChild(nameElt);
+                
+                // hero power stats element
+                const listElt = document.createElement("ul");
+                for (statId in hero.powerstats) {
+                    const statElt = document.createElement("li");
+                    statElt.textContent = statId + " : " + powerStats[statId];
+                    listElt.appendChild(statElt);
+                };
+                boxCardElt.appendChild(listElt);
 
-            contentSelectedHeroElt.appendChild(boxCardElt);
+                contentSelectedHeroElt.appendChild(boxCardElt);
 
-            selectedElt.appendChild(contentSelectedHeroElt);
+                selectedElt.appendChild(contentSelectedHeroElt);
+                selectedLength++;
+            }
         });
         
         // hero img element
