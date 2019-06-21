@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="../assets/css/index.css">
     </head>
     <body>
-        <h1>Choisissez votre héros...</h1>
+        <div class="container">
+            <h1>Choisissez vos héros...</h1>
+            <div id="selected" class="row"></div>
+        </div>
         <div class="container">
         <div id="heroes" class="row"></div>
         </div>
