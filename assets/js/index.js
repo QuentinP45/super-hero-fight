@@ -7,6 +7,7 @@ const selectedElt = document.getElementById("selected");
 
 // variables
 let selectedLength = 0;
+const selectedHeroes = [];
 
 ajaxGet(listHeroes, function(response) {
     let heroes = JSON.parse(response);
@@ -25,8 +26,12 @@ ajaxGet(listHeroes, function(response) {
         const boxCardElt = document.createElement("div");
         boxCardElt.classList.add("box-card");
         boxCardElt.addEventListener("click", function() {
+            
+
             // before heroes selection
             if (selectedLength < 2) {
+                selectedHeroes.push(hero);
+
                 const contentSelectedHeroElt = document.createElement("div");
                 if (selectedLength === 0) {
                     contentSelectedHeroElt.classList.add("offset-md-3", "col-md-2");
@@ -73,15 +78,30 @@ ajaxGet(listHeroes, function(response) {
 
                         // add health bar element to the DOM
                         const boxCardElts = selectedElt.getElementsByClassName("box-card");
+                        let j = 0;
                         Array.from(boxCardElts).forEach(elt => {
                             const healthBarElt = document.createElement("div");
                             healthBarElt.style.border = "solid";
                             healthBarElt.style.width = "100%";
                             healthBarElt.style.height = "20px";
-                            healthBarElt.style.backgroundColor = "green";
+                            
+                            const healthElt = document.createElement("div");
+                            if (j === 0) {
+                                healthElt.id = "health-1";
+                            } else {
+                                healthElt.id = "health-2";
+                            }
+                            healthElt.style.width = "100%";
+                            healthElt.style.height = "15px";
+                            healthElt.style.backgroundColor = "green";
+
+                            healthBarElt.appendChild(healthElt);
 
                             elt.insertBefore(healthBarElt, elt.firstElementChild);
+                            j++;
                         });
+
+                        setTimeout(startFight(selectedHeroes), 2000);
                     }, 2000);
                 }
             }
@@ -131,3 +151,48 @@ function getRandHeroes(heroes, number) {
     return randHeroes;
 }
 
+function startFight(selectedHeroes) {
+    // health
+    const health1Elt = document.getElementById("health-1");
+    let health1Indicator = 100;
+    const health2Elt = document.getElementById("health-2");
+    let health2Indicator = 100;
+
+    // powerstats
+    const forceHero1 = selectedHeroes[0].powerstats.strength/10;
+    const durabilityHero1 = selectedHeroes[0].powerstats.durability;
+
+    const forceHero2 = selectedHeroes[1].powerstats.strength/10;
+    const durabilityHero2 = selectedHeroes[1].powerstats.durability;
+
+    // fight loop
+    const fightToTheDeath = setInterval(function() {
+        // if no hero has lost
+        if (health1Indicator > 0 && health2Indicator > 0) {
+            // if hero1 attacks and hero2 lifeIndic > hero1 strength 
+            if (forceHero1 < health2Indicator) {
+                let lifeLeft = String(health2Indicator - forceHero1);
+                health2Elt.style.width =  lifeLeft + "%";
+                health2Indicator = lifeLeft;
+
+                // if hero2 attacks and hero1 lifeIndic > hero2 strength
+                if (forceHero2 < health1Indicator) {
+                    lifeLeft = String(health1Indicator - forceHero2);
+                    health1Elt.style.width =  lifeLeft + "%";
+                    health1Indicator = lifeLeft;
+                } else {
+                    health1Elt.style.width = "0%";
+                    health1Indicator = 0;
+                    console.log("Hero 1 has lost");
+                }
+            } else {
+                health2Elt.style.width = "0%";
+                health2Indicator = 0;
+                console.log("Hero 2 has lost");
+            }
+        } else {
+            console.log("Terminé, merci d'avoir joué !");
+            clearInterval(fightToTheDeath);
+        }
+    }, 1000);
+}
