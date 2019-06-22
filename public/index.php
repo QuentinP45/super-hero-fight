@@ -9,11 +9,20 @@
     </head>
     <body>
         <div class="container">
-            <h1>Choisissez vos héros...</h1>
-            <div id="selected" class="row"></div>
-        </div>
-        <div class="container">
-        <div id="heroes" class="row"></div>
+            <div class="row">
+                <div class="col-md-3 player-one"></div>
+                <div class="col-md-6 selection">
+                    <div class="row" id="selection-message">
+                        <div class="col">
+                            <h1 class="text-center">Player 1 choose a hero</h1>
+                        </div>
+                    </div>
+                    <div class="row" id="selection-heroes">
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 player-two"></div>
+            </div>
         </div>
         
     <script src="../assets/js/ajax.js"></script>
