@@ -80,6 +80,8 @@ ajaxGet(listHeroes, function(response) {
                         const boxCardElts = selectedElt.getElementsByClassName("box-card");
                         let j = 0;
                         Array.from(boxCardElts).forEach(elt => {
+                            elt.id = selectedHeroes[j].id;
+
                             const healthBarElt = document.createElement("div");
                             healthBarElt.style.border = "solid";
                             healthBarElt.style.width = "100%";
@@ -151,7 +153,12 @@ function getRandHeroes(heroes, number) {
     return randHeroes;
 }
 
-function startFight(selectedHeroes) {
+function startFight() {
+
+    // heros id
+    const hero1Id = selectedHeroes[0].id;
+    const hero2Id = selectedHeroes[1].id;
+
     // health
     const health1Elt = document.getElementById("health-1");
     let health1Indicator = 100;
@@ -181,18 +188,40 @@ function startFight(selectedHeroes) {
                     health1Elt.style.width =  lifeLeft + "%";
                     health1Indicator = lifeLeft;
                 } else {
+                    // Hero 1 has lost
                     health1Elt.style.width = "0%";
                     health1Indicator = 0;
-                    console.log("Hero 1 has lost");
+
+                    selectedElt.removeChild(selectedElt.firstElementChild);
+                    selectedElt.firstElementChild.classList.remove("offset-md-2", "col-md-2");
+                    selectedElt.firstElementChild.classList.add("offset-md-4", "col-md-4");
+
+                    const winnerElt = document.createElement("h1");
+                    winnerElt.textContent = "And the winner is " + selectedHeroes[1].name;
+                    console.log(hero2Id);
+                    const boxCard = document.getElementById(hero2Id);
+                    boxCard.replaceChild(winnerElt, boxCard.firstElementChild);
+
                 }
             } else {
+                // Hero 2 has lost
                 health2Elt.style.width = "0%";
                 health2Indicator = 0;
-                console.log("Hero 2 has lost");
+
+                selectedElt.removeChild(selectedElt.lastElementChild);
+                selectedElt.firstElementChild.classList.remove("offset-md-3", "col-md-2");
+                selectedElt.firstElementChild.classList.add("offset-md-4", "col-md-4");
+
+                const winnerElt = document.createElement("h1");
+                winnerElt.textContent = "And the winner is " + selectedHeroes[0].name;
+                
+                const boxCard = document.getElementById(hero1Id);
+                boxCard.replaceChild(winnerElt, boxCard.firstElementChild);
             }
         } else {
+            // stop the fight
             console.log("Terminé, merci d'avoir joué !");
             clearInterval(fightToTheDeath);
         }
-    }, 1000);
+    }, 200);
 }
