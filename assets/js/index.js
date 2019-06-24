@@ -28,11 +28,12 @@ function addToSelection(randHero) {
 
     // create div with col-4
     const divElt = document.createElement("div");
-    divElt.classList.add("col-md-4");
+    divElt.classList.add("col-md-4", "hero-box");
     divElt.id = randHero.id;
 
     // create div position relative
     const divRelElt = document.createElement("div");
+    divRelElt.classList.add("box-relative");
     divRelElt.style.position = "relative";
 
     // create img
@@ -42,6 +43,7 @@ function addToSelection(randHero) {
     // create hero name
     const nameElt = document.createElement("p");
     nameElt.textContent = randHero.name;
+    nameElt.classList.add("hero-name", "text-center");
     nameElt.style.position = "absolute";
 
     // create card hero

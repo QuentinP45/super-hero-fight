@@ -13,3 +13,26 @@
   width: 100%;
   min-height: 100vh;
 }
+
+.hero-box {
+  padding-bottom: 30px;
+}
+
+.hero-name {
+  visibility: hidden;
+  top: 0px;
+  left: 1px;
+  background-color: black;
+  color: white;
+  opacity: 0.7;
+  width: 100%;
+}
+
+.hero-box:hover .hero-name {
+  visibility: visible;
+}
+
+img {
+  border: 1px solid;
+  box-shadow: 5px 10px 8px #888888;
+}
