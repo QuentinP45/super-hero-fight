@@ -4,21 +4,27 @@ const listHeroes = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api//all.j
 // elements
 const containerElt = document.querySelector(".container");
 
-ajaxGet(listHeroes, function(response) {
-    // heroes
-    const allHeroes = JSON.parse(response);
-    const xRandHeroes = getXRandHeroes(6, allHeroes.length, allHeroes);
+fetch(listHeroes)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+        // heroes
+        const xRandHeroes = getXRandHeroes(6, data.length, data);
+        
+        // add heroes selection
+        xRandHeroes.forEach(randHero => {
+            addToSelection(randHero);
+        })
+    })
 
-    // add heroes selection
-    xRandHeroes.forEach(randHero => {
-        addToSelection(randHero);
-    });
-});
 
 function getXRandHeroes(x, limit, allHeroes) {
     const xRandHeroes = [];
     for (let i = 0; i < x; i++) {
-        xRandHeroes.push(allHeroes[Math.floor(Math.random() * Math.floor(limit))]);
+        const randHeroId = allHeroes[Math.floor(Math.random() * Math.floor(limit))].id;
+
+        if (randHeroId) {
+            xRandHeroes.push(allHeroes[Math.floor(Math.random() * Math.floor(limit))]);
+        }
     }
     return xRandHeroes;
 }
@@ -28,7 +34,7 @@ function addToSelection(randHero) {
 
     // create div with col-4
     const divElt = document.createElement("div");
-    divElt.classList.add("col-md-4", "hero-box");
+    divElt.classList.add("col-md-4 hero-box");
     divElt.id = randHero.id;
 
     // create div position relative
@@ -55,4 +61,3 @@ function addToSelection(randHero) {
     selectionHeroesElt.appendChild(divElt);
     console.log("Ajout des héros dans le bloc sélection");
 }
-
