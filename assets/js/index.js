@@ -9,11 +9,20 @@ fetch(listHeroes)
     .then(function(data) {
         // heroes
         const xRandHeroes = getXRandHeroes(6, data.length, data);
-        
+        return xRandHeroes;
+    })
+    .then(function(xRandHeroes) {
         // add heroes selection
         xRandHeroes.forEach(randHero => {
             addToSelection(randHero);
         })
+    })
+    .then(function() {
+        setTimeout(function() {
+            containerElt.removeChild(containerElt.firstElementChild)
+            const gameFrameElt = document.querySelector(".game-frame");
+            gameFrameElt.classList.remove("game-frame");
+        }, 5000);
     })
 
 
@@ -34,7 +43,7 @@ function addToSelection(randHero) {
 
     // create div with col-4
     const divElt = document.createElement("div");
-    divElt.classList.add("col-md-4 hero-box");
+    divElt.classList.add("col-md-4", "hero-box");
     divElt.id = randHero.id;
 
     // create div position relative

@@ -10,6 +10,14 @@
     <body>
         <div class="container">
             <div class="row">
+                <div class="offset-md-3 col-md-6 loader-box">
+                    <div class="loader-vertical-align">
+                        <h1 class="text-center">Chargement en cours</h1>
+                        <div id="loader"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row game-frame">
                 <div class="col-md-3 player-one"></div>
                 <div class="col-md-6 selection">
                     <div class="row" id="selection-message">
@@ -24,8 +32,6 @@
                 <div class="col-md-3 player-two"></div>
             </div>
         </div>
-        
-    <script src="../assets/js/ajax.js"></script>
     <script src="../assets/js/index.js"></script>
     </body>
 </html>
