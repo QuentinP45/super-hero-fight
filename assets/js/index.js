@@ -4,21 +4,36 @@ const listHeroes = "https://cdn.rawgit.com/akabab/superhero-api/0.2.0/api//all.j
 // elements
 const containerElt = document.querySelector(".container");
 
-ajaxGet(listHeroes, function(response) {
-    // heroes
-    const allHeroes = JSON.parse(response);
-    const xRandHeroes = getXRandHeroes(6, allHeroes.length, allHeroes);
+fetch(listHeroes)
+    .then(function(response) { return response.json() })
+    .then(function(data) {
+        // heroes
+        const xRandHeroes = getXRandHeroes(6, data.length, data);
+        return xRandHeroes;
+    })
+    .then(function(xRandHeroes) {
+        // add heroes selection
+        xRandHeroes.forEach(randHero => {
+            addToSelection(randHero);
+        })
+    })
+    .then(function() {
+        setTimeout(function() {
+            containerElt.removeChild(containerElt.firstElementChild)
+            const gameFrameElt = document.querySelector(".game-frame");
+            gameFrameElt.classList.remove("game-frame");
+        }, 5000);
+    })
 
-    // add heroes selection
-    xRandHeroes.forEach(randHero => {
-        addToSelection(randHero);
-    });
-});
 
 function getXRandHeroes(x, limit, allHeroes) {
     const xRandHeroes = [];
     for (let i = 0; i < x; i++) {
-        xRandHeroes.push(allHeroes[Math.floor(Math.random() * Math.floor(limit))]);
+        const randHeroId = allHeroes[Math.floor(Math.random() * Math.floor(limit))].id;
+
+        if (randHeroId) {
+            xRandHeroes.push(allHeroes[Math.floor(Math.random() * Math.floor(limit))]);
+        }
     }
     return xRandHeroes;
 }
@@ -55,4 +70,3 @@ function addToSelection(randHero) {
     selectionHeroesElt.appendChild(divElt);
     console.log("Ajout des héros dans le bloc sélection");
 }
-
