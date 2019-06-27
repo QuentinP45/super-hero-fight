@@ -13,38 +13,51 @@ fetch(listHeroes)
     })
     .then(function(xRandHeroes) {
         // add heroes selection
-        xRandHeroes.forEach(randHero => {
-            addToSelection(randHero);
-        })
+        for(randHeroId in xRandHeroes) {
+            const heroBoxElt = createHeroBox(xRandHeroes[randHeroId]);
+
+            // custom grid style
+            heroBoxElt.classList.add("col-md-4");            
+
+            // add hero box to the DOM
+            const selectionHeroesElt = document.getElementById("selection-heroes");
+            selectionHeroesElt.appendChild(heroBoxElt);
+        }
+
+        const imgElts = document.getElementsByTagName("img");
+        for (imgElt of imgElts) {
+            imgElt.addEventListener("click", function(e) {
+                const id = e.target.id;               
+            });
+        }
     })
     .then(function() {
         setTimeout(function() {
             containerElt.removeChild(containerElt.firstElementChild)
             const gameFrameElt = document.querySelector(".game-frame");
             gameFrameElt.classList.remove("game-frame");
-        }, 5000);
+        }, 4500);
     })
 
 
 function getXRandHeroes(x, limit, allHeroes) {
-    const xRandHeroes = [];
-    for (let i = 0; i < x; i++) {
-        const randHeroId = allHeroes[Math.floor(Math.random() * Math.floor(limit))].id;
+    const xRandHeroes = {};
 
-        if (randHeroId) {
-            xRandHeroes.push(allHeroes[Math.floor(Math.random() * Math.floor(limit))]);
-        }
+    let i = 0
+    while (i < x) {
+        const randHero = allHeroes[Math.floor(Math.random() * Math.floor(limit))];
+        xRandHeroes[randHero.id] = randHero;
+        i++;
     }
+    
     return xRandHeroes;
 }
 
-function addToSelection(randHero) {
-    const selectionHeroesElt = document.getElementById("selection-heroes");
-
-    // create div with col-4
+function createHeroBox(randHero) {
+    // create div
     const divElt = document.createElement("div");
-    divElt.classList.add("col-md-4", "hero-box");
-    divElt.id = randHero.id;
+    divElt.classList.add("hero-box");
+    // divElt.id = randHero.id;
 
     // create div position relative
     const divRelElt = document.createElement("div");
@@ -54,6 +67,7 @@ function addToSelection(randHero) {
     // create img
     const imgElt = document.createElement("img");
     imgElt.src = randHero.images.sm;
+    imgElt.id = randHero.id;
 
     // create hero name
     const nameElt = document.createElement("p");
@@ -66,7 +80,5 @@ function addToSelection(randHero) {
     divRelElt.appendChild(nameElt);
     divElt.appendChild(divRelElt);
 
-    // add card hero to the DOM
-    selectionHeroesElt.appendChild(divElt);
-    console.log("Ajout des héros dans le bloc sélection");
+    return divElt;
 }

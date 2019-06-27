@@ -25,9 +25,7 @@
                             <h1 class="text-center">Player 1 choose a hero</h1>
                         </div>
                     </div>
-                    <div class="row" id="selection-heroes">
-                        
-                    </div>
+                    <div class="row" id="selection-heroes"></div>
                 </div>
                 <div class="col-md-3 player-two"></div>
             </div>
