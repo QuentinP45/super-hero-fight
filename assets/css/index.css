@@ -63,3 +63,12 @@ img {
 .game-frame {
   display: none;
 }
+
+.box-relative {
+  position: relative;
+}
+
+.img-selected {
+  height : 241.6px;
+  width: 161.6px;
+}

@@ -18,7 +18,16 @@
                 </div>
             </div>
             <div class="row game-frame">
-                <div class="col-md-3 player-one"></div>
+                <div class="col-md-3 player-one">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <p class="text-center">Player 1</p>
+                                <img src="../assets/images/none.jpg" class="img-selected img-fluid mx-auto d-block"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-6 selection">
                     <div class="row" id="selection-message">
                         <div class="col">
@@ -27,7 +36,15 @@
                     </div>
                     <div class="row" id="selection-heroes"></div>
                 </div>
-                <div class="col-md-3 player-two"></div>
+                <div class="col-md-3 player-two">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <p class="text-center">Player 2</p>
+                            <img src="../assets/images/none.jpg" class="img-selected img-fluid mx-auto d-block"/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     <script src="../assets/js/index.js"></script>
