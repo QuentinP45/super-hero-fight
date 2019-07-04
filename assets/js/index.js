@@ -26,13 +26,37 @@ fetch(listHeroes)
             selectionHeroesElt.appendChild(heroBoxElt);
         }
 
+        let selectedOne = false;
+        let selectedTwo = false;
+
         // Add event listener to selection images
         const imgSelectionElts = document.getElementsByClassName("img-selection");
         for (imgSelectionElt of imgSelectionElts) {
             imgSelectionElt.addEventListener("click", function(e) {
+                // get hero id
                 const id = e.target.id;
-                console.log(id);
-                console.log(xRandHeroes[id]);
+
+                // get hero-box element and create clone
+                const relElt = e.target.parentNode;
+                const boxHero = relElt.parentNode;
+                const cloneBoxHero = boxHero.cloneNode(true);
+
+                // change clone style and class
+                cloneBoxHero.classList.remove("col-md-4");
+                cloneBoxHero.classList.add("col");
+                cloneBoxHero.firstElementChild.style.width = "161.6px";
+                cloneBoxHero.firstElementChild.classList.add("mx-auto", "d-block");
+                
+                // replace default player selection with selected hero
+                if (!selectedOne) {
+                    const selectedOneElt = document.querySelector(".selected-one");
+                    selectedOneElt.parentNode.replaceChild(cloneBoxHero, selectedOneElt);
+                    selectedOne = true;
+                } else if (!selectedTwo) {
+                    const selectedTwoElt = document.querySelector(".selected-two");
+                    selectedTwoElt.parentNode.replaceChild(cloneBoxHero, selectedTwoElt);
+                    selectedTwo = true;
+                }
             });
         }
     })
