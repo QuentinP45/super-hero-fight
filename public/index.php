@@ -19,10 +19,10 @@
             </div>
             <div class="row game-frame">
                 <div class="col-md-3 player-one">
+                    <p class="text-center">Player 1</p>
                     <div class="row">
-                        <div class="col">
+                        <div class="col selected-one">
                             <div>
-                                <p class="text-center">Player 1</p>
                                 <img src="../assets/images/none.jpg" class="img-selected img-fluid mx-auto d-block"/>
                             </div>
                         </div>
@@ -37,11 +37,12 @@
                     <div class="row" id="selection-heroes"></div>
                 </div>
                 <div class="col-md-3 player-two">
-                <div class="row">
-                    <div class="col">
-                        <div>
-                            <p class="text-center">Player 2</p>
-                            <img src="../assets/images/none.jpg" class="img-selected img-fluid mx-auto d-block"/>
+                    <p class="text-center">Player 2</p>
+                    <div class="row">
+                        <div class="col selected-two">
+                            <div>
+                                <img src="../assets/images/none.jpg" class="img-selected img-fluid mx-auto d-block"/>
+                            </div>
                         </div>
                     </div>
                 </div>
