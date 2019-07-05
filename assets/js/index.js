@@ -51,10 +51,28 @@ fetch(listHeroes)
                 if (!selectedOne) {
                     const selectedOneElt = document.querySelector(".selected-one");
                     selectedOneElt.parentNode.replaceChild(cloneBoxHero, selectedOneElt);
+
+                    // add hero stats element
+                    const heroStatsElt = createHeroStatsElt(xRandHeroes[id]);
+                    heroStatsElt.style.width = "161.6px";
+                    heroStatsElt.classList.add("stats-one", "mx-auto", "d-block");
+
+                    const playerElt = document.querySelector(".player-one .hero-box");
+                    playerElt.appendChild(heroStatsElt);
+
                     selectedOne = true;
                 } else if (!selectedTwo) {
                     const selectedTwoElt = document.querySelector(".selected-two");
                     selectedTwoElt.parentNode.replaceChild(cloneBoxHero, selectedTwoElt);
+
+                    // add hero stats element
+                    const heroStatsElt = createHeroStatsElt(xRandHeroes[id]);
+                    heroStatsElt.style.width = "161.6px";
+                    heroStatsElt.classList.add("stats-one", "mx-auto", "d-block");
+                    
+                    const playerElt = document.querySelector(".player-two .hero-box");
+                    playerElt.appendChild(heroStatsElt);
+
                     selectedTwo = true;
                 }
             });
@@ -112,4 +130,102 @@ function createHeroBox(randHero) {
     divElt.appendChild(divRelElt);
 
     return divElt;
+}
+
+function createHeroStatsElt(hero) {
+    // intelligence element
+    const intelligenceElt = document.createElement("div");
+    intelligenceElt.style.height = "10px";
+    intelligenceElt.style.witdh = "100%";
+    intelligenceElt.style.border = "solid black 1px";
+
+    const intStatElt = document.createElement("div");
+    intStatElt.style.backgroundColor = "blue";
+    intStatElt.style.height = "100%";
+    intStatElt.style.width = hero.powerstats.intelligence + "%";
+    intStatElt.classList.add("intelligence");
+    
+    intelligenceElt.appendChild(intStatElt);
+    
+    // strength element
+    const strengthElt = document.createElement("div");
+    strengthElt.style.height = "10px";
+    strengthElt.style.witdh = "100%";
+    strengthElt.style.border = "solid black 1px";
+
+    const strStatElt = document.createElement("div");
+    strStatElt.style.backgroundColor = "red";
+    strStatElt.style.height = "100%";
+    strStatElt.style.width = hero.powerstats.strength + "%";
+    strStatElt.classList.add("strength");
+    
+    strengthElt.appendChild(strStatElt);
+    
+    // speed element
+    const speedElt = document.createElement("div");
+    speedElt.style.height = "10px";
+    speedElt.style.witdh = "100%";
+    speedElt.style.border = "solid black 1px";
+
+    const speStatElt = document.createElement("div");
+    speStatElt.style.backgroundColor = "yellow";
+    speStatElt.style.height = "100%";
+    speStatElt.style.width = hero.powerstats.speed + "%";
+    speStatElt.classList.add("strength");
+    
+    speedElt.appendChild(speStatElt);
+
+    // durability element
+    const durabilityElt = document.createElement("div");
+    durabilityElt.style.height = "10px";
+    durabilityElt.style.witdh = "100%";
+    durabilityElt.style.border = "solid black 1px";
+
+    const durStatElt = document.createElement("div");
+    durStatElt.style.backgroundColor = "green";
+    durStatElt.style.height = "100%";
+    durStatElt.style.width = hero.powerstats.durability + "%";
+    durStatElt.classList.add("durability");
+    
+    durabilityElt.appendChild(durStatElt);
+
+    // power element
+    const powerElt = document.createElement("div");
+    powerElt.style.height = "10px";
+    powerElt.style.witdh = "100%";
+    powerElt.style.border = "solid black 1px";
+
+    const powStatElt = document.createElement("div");
+    powStatElt.style.backgroundColor = "red";
+    powStatElt.style.height = "100%";
+    powStatElt.style.width = hero.powerstats.power + "%";
+    powStatElt.classList.add("power");
+    
+    powerElt.appendChild(powStatElt);
+
+    // combat element
+    const combatElt = document.createElement("div");
+    combatElt.style.height = "10px";
+    combatElt.style.witdh = "100%";
+    combatElt.style.border = "solid black 1px";
+
+    const comStatElt = document.createElement("div");
+    comStatElt.style.backgroundColor = "purple";
+    comStatElt.style.height = "100%";
+    comStatElt.style.width = hero.powerstats.combat + "%";
+    comStatElt.classList.add("combat");
+    
+    combatElt.appendChild(comStatElt);
+
+    // hero stats element
+    const heroStatsElt = document.createElement("div");
+    
+    heroStatsElt.appendChild(intelligenceElt);
+    heroStatsElt.appendChild(strengthElt);
+    heroStatsElt.appendChild(speedElt);
+    heroStatsElt.appendChild(durabilityElt);
+    heroStatsElt.appendChild(powerElt);
+    heroStatsElt.appendChild(combatElt);
+
+    return heroStatsElt;
 }
