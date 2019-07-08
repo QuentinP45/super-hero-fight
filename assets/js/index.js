@@ -54,15 +54,6 @@ ajaxGet(listHeroes, function(response) {
                 nameElt.classList.add("hero-name");
                 boxCardElt.appendChild(nameElt);
                 
-                // hero power stats element
-                const listElt = document.createElement("ul");
-                for (statId in hero.powerstats) {
-                    const statElt = document.createElement("li");
-                    statElt.textContent = statId + " : " + powerStats[statId];
-                    listElt.appendChild(statElt);
-                };
-                boxCardElt.appendChild(listElt);
-
                 contentSelectedHeroElt.appendChild(boxCardElt);
 
                 selectedElt.appendChild(contentSelectedHeroElt);
@@ -120,15 +111,6 @@ ajaxGet(listHeroes, function(response) {
         nameElt.textContent = name;
         nameElt.classList.add("hero-name");
         boxCardElt.appendChild(nameElt);
-        
-        // hero power stats element
-        const listElt = document.createElement("ul");
-        for (statId in powerStats) {
-            const statElt = document.createElement("li");
-            statElt.textContent = statId + " : " + powerStats[statId];
-            listElt.appendChild(statElt);
-        };
-        boxCardElt.appendChild(listElt);
 
         contentElt.appendChild(boxCardElt);
 
