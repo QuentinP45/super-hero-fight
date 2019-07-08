@@ -149,10 +149,8 @@ function startFight() {
 
     // powerstats
     const forceHero1 = selectedHeroes[0].powerstats.strength/10;
-    const durabilityHero1 = selectedHeroes[0].powerstats.durability;
 
     const forceHero2 = selectedHeroes[1].powerstats.strength/10;
-    const durabilityHero2 = selectedHeroes[1].powerstats.durability;
 
     // fight loop
     const fightToTheDeath = setInterval(function() {
@@ -176,14 +174,13 @@ function startFight() {
 
                     selectedElt.removeChild(selectedElt.firstElementChild);
                     selectedElt.firstElementChild.classList.remove("offset-md-2", "col-md-2");
-                    selectedElt.firstElementChild.classList.add("offset-md-4", "col-md-4");
+                    selectedElt.firstElementChild.classList.add("offset-md-5", "col-md-2");
 
                     const winnerElt = document.createElement("h1");
                     winnerElt.textContent = "And the winner is " + selectedHeroes[1].name;
-                    console.log(hero2Id);
-                    const boxCard = document.getElementById(hero2Id);
-                    boxCard.replaceChild(winnerElt, boxCard.firstElementChild);
-
+                    
+                    const containerElt = document.querySelector(".container");
+                    containerElt.replaceChild(winnerElt, containerElt.firstElementChild);
                 }
             } else {
                 // Hero 2 has lost
@@ -192,13 +189,13 @@ function startFight() {
 
                 selectedElt.removeChild(selectedElt.lastElementChild);
                 selectedElt.firstElementChild.classList.remove("offset-md-3", "col-md-2");
-                selectedElt.firstElementChild.classList.add("offset-md-4", "col-md-4");
+                selectedElt.firstElementChild.classList.add("offset-md-5", "col-md-2");
 
                 const winnerElt = document.createElement("h1");
                 winnerElt.textContent = "And the winner is " + selectedHeroes[0].name;
                 
-                const boxCard = document.getElementById(hero1Id);
-                boxCard.replaceChild(winnerElt, boxCard.firstElementChild);
+                const containerElt = document.querySelector(".container");
+                containerElt.replaceChild(winnerElt, containerElt.firstElementChild);
             }
         } else {
             // stop the fight
