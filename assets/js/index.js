@@ -21,7 +21,7 @@ ajaxGet(listHeroes, function(response) {
 
         // container elements
         const contentElt = document.createElement("div");
-        contentElt.classList.add("col-4", "col-sm-4", "col-md-2");
+        contentElt.classList.add("col-6", "col-sm-4", "col-md-2");
 
         const boxCardElt = document.createElement("div");
         boxCardElt.classList.add("box-card");
@@ -34,9 +34,9 @@ ajaxGet(listHeroes, function(response) {
 
                 const contentSelectedHeroElt = document.createElement("div");
                 if (selectedLength === 0) {
-                    contentSelectedHeroElt.classList.add("col-6", "offset-sm-1", "col-sm-4", "offset-md-3", "col-md-2");
+                    contentSelectedHeroElt.classList.add("col-6", "offset-sm-1", "col-sm-5", "offset-md-2", "col-md-4");
                 } else {
-                    contentSelectedHeroElt.classList.add("col-6", "offset-sm-2", "col-sm-4", "offset-md-2", "col-md-2");
+                    contentSelectedHeroElt.classList.add("col-6", "col-sm-5", "col-md-4");
                 }
 
                 const boxCardElt = document.createElement("div");
@@ -47,13 +47,22 @@ ajaxGet(listHeroes, function(response) {
                 imgElt.src = hero.images.sm;
                 imgElt.alt = "Image de " + hero.name;
                 imgElt.classList.add("img-fluid");
-                boxCardElt.appendChild(imgElt);
                 
                 // hero name element
                 const nameElt = document.createElement("p");
                 nameElt.textContent = hero.name;
                 nameElt.classList.add("hero-name");
-                boxCardElt.appendChild(nameElt);
+
+                // relElt contains img + name
+                const divRel = document.createElement("div");
+                divRel.style.position = "relative";
+                divRel.style.display = "inline-block";
+                divRel.appendChild(imgElt);
+                divRel.appendChild(nameElt);
+
+                boxCardElt.appendChild(divRel);
+
+                contentElt.appendChild(boxCardElt);
                 
                 contentSelectedHeroElt.appendChild(boxCardElt);
 
@@ -73,6 +82,7 @@ ajaxGet(listHeroes, function(response) {
                         let j = 0;
                         Array.from(boxCardElts).forEach(elt => {
                             elt.id = selectedHeroes[j].id;
+                            elt.style.display = "inline-block";
 
                             const healthBarElt = document.createElement("div");
                             healthBarElt.style.border = "solid";
@@ -96,7 +106,7 @@ ajaxGet(listHeroes, function(response) {
                         });
 
                         setTimeout(startFight(selectedHeroes), 2000);
-                    }, 2000);
+                    }, 850);
                 }
             }
         });
@@ -106,13 +116,20 @@ ajaxGet(listHeroes, function(response) {
         imgElt.src = imageSM;
         imgElt.alt = "Image de " + name;
         imgElt.classList.add("img-fluid");
-        boxCardElt.appendChild(imgElt);
-        
+              
         // hero name element
         const nameElt = document.createElement("p");
         nameElt.textContent = name;
         nameElt.classList.add("hero-name");
-        boxCardElt.appendChild(nameElt);
+
+        // relElt contains img + name
+        const divRel = document.createElement("div");
+        divRel.style.position = "relative";
+        divRel.style.display = "inline-block";
+        divRel.appendChild(imgElt);
+        divRel.appendChild(nameElt);
+
+        boxCardElt.appendChild(divRel);
 
         contentElt.appendChild(boxCardElt);
 
@@ -174,9 +191,13 @@ function startFight() {
                     health1Elt.style.width = "0%";
                     health1Indicator = 0;
 
+                    const boxCard = document.getElementById(hero2Id);
+                    boxCard.removeChild(boxCard.firstElementChild);
+
                     selectedElt.removeChild(selectedElt.firstElementChild);
-                    selectedElt.firstElementChild.classList.remove("col-6", "offset-sm-2", "col-sm-4");
-                    selectedElt.firstElementChild.classList.add("offset-3", "col-6", "offset-md-5", "col-md-2");
+                    selectedElt.firstChild.classList.remove("col-6", "col-sm-5", "col-md-4");
+                    selectedElt.firstChild.classList.add("col");
+                    selectedElt.styl
 
                     const winnerElt = document.createElement("h1");
                     winnerElt.textContent = "The winner is " + selectedHeroes[1].name;
@@ -189,9 +210,12 @@ function startFight() {
                 health2Elt.style.width = "0%";
                 health2Indicator = 0;
 
+                const boxCard = document.querySelector(".box-card");
+                boxCard.removeChild(boxCard.firstElementChild);
+
                 selectedElt.removeChild(selectedElt.lastElementChild);
-                selectedElt.firstElementChild.classList.remove("col-6", "offset-sm-2", "col-sm-4");
-                selectedElt.firstElementChild.classList.add("offset-3", "col-6", "offset-md-5", "col-md-2");
+                selectedElt.firstElementChild.classList.remove("col-6", "offset-sm-1", "col-sm-5", "offset-md-2", "col-md-4");
+                selectedElt.firstElementChild.classList.add("col");
 
                 const winnerElt = document.createElement("h1");
                 winnerElt.textContent = "And the winner is " + selectedHeroes[0].name;
