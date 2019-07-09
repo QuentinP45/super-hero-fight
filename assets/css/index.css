@@ -4,6 +4,7 @@ img {
     transition: 0.3s;
     /* position: relative; */
     margin: 5px 0 5px 0; 
+    object-fit: cover;
   }
   
 /* On mouse-over, add a deeper shadow */
