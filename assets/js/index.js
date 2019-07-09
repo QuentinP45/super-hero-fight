@@ -106,13 +106,21 @@ ajaxGet(listHeroes, function(response) {
         imgElt.src = imageSM;
         imgElt.alt = "Image de " + name;
         imgElt.classList.add("img-fluid");
-        boxCardElt.appendChild(imgElt);
+        // boxCardElt.appendChild(imgElt);
         
         // hero name element
         const nameElt = document.createElement("p");
         nameElt.textContent = name;
         nameElt.classList.add("hero-name");
-        boxCardElt.appendChild(nameElt);
+        // boxCardElt.appendChild(nameElt);
+
+        // relElt contains img + name
+        const divRel = document.createElement("div");
+        divRel.style.position = "relative";
+        divRel.appendChild(imgElt);
+        divRel.appendChild(nameElt);
+
+        boxCardElt.appendChild(divRel);
 
         contentElt.appendChild(boxCardElt);
 

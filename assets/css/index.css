@@ -1,13 +1,13 @@
-.box-card {
+img {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    position: relative;
+    /* position: relative; */
     margin: 5px 0 5px 0; 
   }
   
 /* On mouse-over, add a deeper shadow */
-.box-card:hover {
+img:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -19,7 +19,7 @@
   visibility: hidden;
   position: absolute;
   width: 100%;
-  top: 0px;
+  top: 5px;
   text-align: center;
   color: white;
   font-size: 20px;
