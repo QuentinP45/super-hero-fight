@@ -21,7 +21,7 @@ ajaxGet(listHeroes, function(response) {
 
         // container elements
         const contentElt = document.createElement("div");
-        contentElt.classList.add("col-md-2");
+        contentElt.classList.add("col-4", "col-sm-4", "col-md-2");
 
         const boxCardElt = document.createElement("div");
         boxCardElt.classList.add("box-card");
@@ -34,9 +34,9 @@ ajaxGet(listHeroes, function(response) {
 
                 const contentSelectedHeroElt = document.createElement("div");
                 if (selectedLength === 0) {
-                    contentSelectedHeroElt.classList.add("offset-md-3", "col-md-2");
+                    contentSelectedHeroElt.classList.add("col-6", "offset-sm-1", "col-sm-4", "offset-md-3", "col-md-2");
                 } else {
-                    contentSelectedHeroElt.classList.add("offset-md-2", "col-md-2");
+                    contentSelectedHeroElt.classList.add("col-6", "offset-sm-2", "col-sm-4", "offset-md-2", "col-md-2");
                 }
 
                 const boxCardElt = document.createElement("div");
@@ -46,6 +46,7 @@ ajaxGet(listHeroes, function(response) {
                 const imgElt = document.createElement("img");
                 imgElt.src = hero.images.sm;
                 imgElt.alt = "Image de " + hero.name;
+                imgElt.classList.add("img-fluid");
                 boxCardElt.appendChild(imgElt);
                 
                 // hero name element
@@ -104,6 +105,7 @@ ajaxGet(listHeroes, function(response) {
         const imgElt = document.createElement("img");
         imgElt.src = imageSM;
         imgElt.alt = "Image de " + name;
+        imgElt.classList.add("img-fluid");
         boxCardElt.appendChild(imgElt);
         
         // hero name element
@@ -173,11 +175,11 @@ function startFight() {
                     health1Indicator = 0;
 
                     selectedElt.removeChild(selectedElt.firstElementChild);
-                    selectedElt.firstElementChild.classList.remove("offset-md-2", "col-md-2");
-                    selectedElt.firstElementChild.classList.add("offset-md-5", "col-md-2");
+                    selectedElt.firstElementChild.classList.remove("col-6", "offset-sm-2", "col-sm-4");
+                    selectedElt.firstElementChild.classList.add("offset-3", "col-6", "offset-md-5", "col-md-2");
 
                     const winnerElt = document.createElement("h1");
-                    winnerElt.textContent = "And the winner is " + selectedHeroes[1].name;
+                    winnerElt.textContent = "The winner is " + selectedHeroes[1].name;
                     
                     const containerElt = document.querySelector(".container");
                     containerElt.replaceChild(winnerElt, containerElt.firstElementChild);
@@ -188,8 +190,8 @@ function startFight() {
                 health2Indicator = 0;
 
                 selectedElt.removeChild(selectedElt.lastElementChild);
-                selectedElt.firstElementChild.classList.remove("offset-md-3", "col-md-2");
-                selectedElt.firstElementChild.classList.add("offset-md-5", "col-md-2");
+                selectedElt.firstElementChild.classList.remove("col-6", "offset-sm-2", "col-sm-4");
+                selectedElt.firstElementChild.classList.add("offset-3", "col-6", "offset-md-5", "col-md-2");
 
                 const winnerElt = document.createElement("h1");
                 winnerElt.textContent = "And the winner is " + selectedHeroes[0].name;
