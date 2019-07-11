@@ -200,7 +200,7 @@ function startFight() {
                     selectedElt.styl
 
                     const winnerElt = document.createElement("h1");
-                    winnerElt.textContent = "The winner is " + selectedHeroes[1].name;
+                    winnerElt.textContent = "Le vainqueur est " + selectedHeroes[1].name;
                     
                     const containerElt = document.querySelector(".container");
                     containerElt.replaceChild(winnerElt, containerElt.firstElementChild);
